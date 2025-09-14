@@ -1,0 +1,30 @@
+.luxury-navbar {
+  background: rgba(0, 0, 0, 0.9);
+  padding: 15px;
+}
+
+.luxury-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.brand-highlight {
+  color: #c0a062;
+}
+
+.luxury-nav-links .nav-link {
+  color: #f5f5f5 !important;
+  margin: 0 15px;
+  transition: color 0.3s ease;
+}
+
+.luxury-nav-links .nav-link:hover {
+  color: #c0a062 !important;
+}
+
+.auth-btn {
+  font-weight: bold;
+  border-radius: 20px;
+  padding: 6px 16px;
+}
