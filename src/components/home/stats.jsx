@@ -50,7 +50,11 @@ const Stats = () => {
                                             animate={{ y: 0, opacity: 1 }}
                                             transition={{ delay: idx * 0.2, duration: 0.6 }}
                                         >
-                                            <CountUp end={stat.number} duration={2.5} />
+                                            <CountUp
+                                                end={stat.number}
+                                                duration={2.5}
+                                                decimals={stat.number % 1 !== 0 ? 1 : 0}
+                                            />
                                         </motion.span>
                                     )}{" "}
                                     {stat.suffix}

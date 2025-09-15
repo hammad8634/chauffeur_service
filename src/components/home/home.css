@@ -355,154 +355,12 @@
   color: #bbb;
 }
 
-/* Banner Section */
-.banner-section {
-  position: relative;
-  background: url("https://images.unsplash.com/photo-1502877338535-766e1452684a")
-    center/cover no-repeat;
-  min-height: 70vh;
-  display: flex;
-  align-items: center;
-  color: #fff;
-}
-
-.banner-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.65); /* dark overlay */
-  z-index: 0;
-}
-
-.banner-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  line-height: 1.3;
-  color: #fff;
-  position: relative;
-  z-index: 1;
-}
-
-.banner-title .highlight {
-  color: #c0a062; /* gold accent */
-}
-
-.banner-subtitle {
-  font-size: 1.1rem;
-  margin-top: 15px;
-  margin-bottom: 25px;
-  color: #ddd;
-  position: relative;
-  z-index: 1;
-  max-width: 600px;
-}
-
-.banner-btn {
-  background: linear-gradient(135deg, #d4af37, #f5e3b3);
-  border: none;
-  font-weight: bold !important;
-  padding: 12px 28px;
-  border-radius: 50px;
-  color: #000;
-  transition: all 0.3s ease;
-  z-index: 1;
-  position: relative;
-}
-
-.banner-btn:hover {
-  background: #fff;
-  color: #000;
-  transform: translateY(-3px);
-  border: 1px solid #c0a062 !important;
-  box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .banner-title {
-    font-size: 1.8rem;
-  }
-  .banner-subtitle {
-    font-size: 1rem;
-  }
-}
-
 /* Highlight middle step */
 .active-step {
   background: rgba(192, 160, 98, 0.1);
   border: 1px solid #c0a062;
 }
-/* Video Section */
-.video-section {
-  background: url("https://images.unsplash.com/photo-1533473359331-0135ef1b58bf")
-    center/cover no-repeat;
-  position: relative;
-  padding: 80px 20px;
-  color: #fff;
-}
 
-.video-overlay {
-  background: rgba(0, 0, 0, 0.65); /* dark overlay */
-  padding: 60px 30px;
-  border-radius: 16px;
-}
-
-/* Play Button */
-.play-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  background: rgba(192, 160, 98, 0.9); /* gold */
-  border-radius: 50%;
-  color: #000;
-  font-size: 2.5rem;
-  transition: all 0.3s ease;
-  box-shadow: 0 6px 20px rgba(192, 160, 98, 0.4);
-}
-
-.play-btn:hover {
-  background: #fff;
-  color: #000;
-  transform: scale(1.1);
-}
-
-/* Text */
-.video-title {
-  font-size: 2rem;
-  font-weight: bold;
-  color: #c0a062;
-  margin-bottom: 15px;
-}
-
-.video-subtitle {
-  color: #ddd;
-  font-size: 1rem;
-  margin-bottom: 20px;
-  max-width: 500px;
-}
-
-/* CTA Button */
-.video-btn {
-  background: linear-gradient(135deg, #d4af37, #f5e3b3);
-  border: none;
-  font-weight: bold !important;
-  padding: 12px 24px;
-  border-radius: 50px;
-  color: #000;
-  transition: all 0.3s ease;
-}
-
-.video-btn:hover {
-  background: #fff;
-  color: #000;
-  border: 1px solid #c0a062 !important;
-  transform: translateY(-2px);
-}
 /* Benefits Section */
 .benefits-section {
   background: #0d0d0d;
@@ -609,7 +467,7 @@
   font-size: 1rem;
   color: #ccc;
   margin-bottom: 25px;
-  max-width: 700px;
+  /* max-width: 700px; */
   margin-left: auto;
   margin-right: auto;
   position: relative;
@@ -626,61 +484,4 @@
   transform: translateY(-2px);
   box-shadow: 0 6px 13px rgba(212, 175, 55, 0.5);
 }
-/* Luxury Section */
-.luxury-section {
-  background: #000; /* deep black */
-  padding: 80px 0;
-  color: #fff;
-}
 
-.luxury-content {
-  padding-right: 30px;
-}
-
-.luxury-title {
-  font-size: 2.8rem;
-  font-weight: 700;
-  line-height: 1.3;
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.luxury-title .highlight {
-  color: #c0a062; /* Gold accent */
-}
-
-.luxury-subtitle {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  color: #ccc;
-  margin-bottom: 30px;
-  max-width: 500px;
-}
-
-.luxury-car-img {
-  max-width: 100%;
-  height: auto;
-  filter: drop-shadow(0px 8px 20px rgba(192, 160, 98, 0.2));
-  transition: transform 0.4s ease;
-}
-
-.luxury-car-img:hover {
-  transform: scale(1.05);
-}
-
-/* Responsive */
-@media (max-width: 991px) {
-  .luxury-content {
-    padding-right: 0;
-    text-align: center;
-    margin-bottom: 30px;
-  }
-
-  .luxury-title {
-    font-size: 2.2rem;
-  }
-
-  .luxury-subtitle {
-    font-size: 1rem;
-  }
-}

@@ -2,14 +2,14 @@ import React from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./navbar.css";
+import logo from "../../images/main-logo-no-bg.png";
 
 const LuxuryNavbar = () => {
   return (
     <Navbar expand="lg" className="luxury-navbar fixed-top" variant="dark">
       <Container>
-        {/* Logo */}
         <Navbar.Brand as={Link} to="/" className="luxury-logo">
-          Limo <span className="brand-highlight">Rent</span>
+          <img src={logo} alt="Chauffeur Logo" />
         </Navbar.Brand>
 
         <Navbar.Toggle aria-controls="navbar-nav" />
@@ -23,8 +23,7 @@ const LuxuryNavbar = () => {
 
           {/* Right side buttons */}
           <div className="auth-buttons">
-            <Button variant="outline-light" className="auth-btn">Sign In</Button>
-            <Button variant="warning" className="auth-btn ms-2">Sign Up</Button>
+            <Button variant="warning" className="auth-btn ms-2">Book Now</Button>
           </div>
         </Navbar.Collapse>
       </Container>

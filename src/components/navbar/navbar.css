@@ -3,10 +3,9 @@
   padding: 15px;
 }
 
-.luxury-logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #fff;
+.luxury-logo img {
+  height: 140px;
+  width: auto;
 }
 
 .brand-highlight {
