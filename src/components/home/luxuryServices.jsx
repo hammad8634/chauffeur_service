@@ -1,6 +1,12 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import Slider from "react-slick";
+
+// Swiper
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+
 import "./luxuryServices.css";
 
 const services = [
@@ -47,21 +53,6 @@ const services = [
 ];
 
 const LuxuryServices = () => {
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 800,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 2500,
-        arrows: true,
-        responsive: [
-            { breakpoint: 992, settings: { slidesToShow: 2 } }, // tablet
-            { breakpoint: 576, settings: { slidesToShow: 1 } }  // mobile
-        ]
-    };
-
     return (
         <section className="luxury-services py-5">
             <Container>
@@ -69,9 +60,22 @@ const LuxuryServices = () => {
                     Premium Chauffeur Services
                 </h2>
 
-                <Slider {...settings} className="services-slider">
+                <Swiper
+                    modules={[Navigation, Autoplay]}
+                    navigation
+                    loop
+                    autoplay={{ delay: 2500, disableOnInteraction: false }}
+                    speed={800}
+                    spaceBetween={24}
+                    slidesPerView={1}                 // mobile first
+                    breakpoints={{
+                        768: { slidesPerView: 2 },      // ≥768px (tablet)
+                        992: { slidesPerView: 3 },      // ≥992px (desktop)
+                    }}
+                    className="global-swiper"
+                >
                     {services.map((service, idx) => (
-                        <div key={idx}>
+                        <SwiperSlide key={idx}>
                             <div className="service-card-carousel">
                                 <img src={service.img} alt={service.title} className="service-img" />
                                 <div className="service-content">
@@ -79,10 +83,9 @@ const LuxuryServices = () => {
                                     <p className="service-text">{service.text}</p>
                                 </div>
                             </div>
-                        </div>
+                        </SwiperSlide>
                     ))}
-                </Slider>
-
+                </Swiper>
             </Container>
         </section>
     );

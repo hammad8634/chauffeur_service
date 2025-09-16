@@ -28,10 +28,6 @@
   box-shadow: 0 5px 20px rgba(247, 201, 66, 0.3);
 }
 
-.services-slider .slick-slide {
-  padding: 20px 15px; 
-}
-
 .service-card-carousel {
   display: flex;
   flex-direction: column;
@@ -70,20 +66,4 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-/* Slick arrows custom style */
-.slick-prev:before,
-.slick-next:before {
-  font-size: 28px;
-  color: #f7c942;
-}
-
-.slick-prev {
-  left: -40px;
-  z-index: 2;
-}
-.slick-next {
-  right: -40px;
-  z-index: 2;
 }

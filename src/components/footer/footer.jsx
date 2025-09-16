@@ -7,33 +7,48 @@ const Footer = () => {
     <footer className="luxury-footer">
       <Container>
         <Row>
+          {/* Brand Info */}
           <Col md={6}>
-            <h4 className="footer-brand">Opremum Lixyry</h4>
-            <p>Luxury Rolls Royce Chauffeur Service, redefining elegance and comfort in every journey.</p>
+            <h4 className="footer-brand">Rolls Royce Transfers</h4>
+            <p>
+              Premium Rolls Royce chauffeur service in Dubai. Experience unmatched elegance, comfort, and professionalism on every journey.
+            </p>
           </Col>
+
+          {/* Quick Links */}
           <Col md={3}>
-            <h5>Quick Links</h5>
+            <h5 className="footer-brand">Quick Links</h5>
             <ul className="footer-links">
               <li>Home</li>
-              <li>About</li>
+              <li>About Us</li>
               <li>Contact</li>
               <li>FAQ</li>
             </ul>
           </Col>
+
+          {/* Contact Info */}
           <Col md={3}>
-            <h5>Contact</h5>
-            <p>Email: info@opremumlixyry.com</p>
-            <p>Phone: +971 55 123 4567</p>
+            <h5 className="footer-brand">Contact</h5>
+            <p>Email: info@rollsroycetransfers.com</p>
+            <p>Phone: +971 55 515 3069</p>
             <div className="footer-socials">
-              <i className="bi bi-instagram"></i>
-              <i className="bi bi-facebook"></i>
-              <i className="bi bi-linkedin"></i>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                <i className="bi bi-instagram"></i>
+              </a>
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                <i className="bi bi-facebook"></i>
+              </a>
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                <i className="bi bi-linkedin"></i>
+              </a>
             </div>
           </Col>
         </Row>
+
+        {/* Bottom Row */}
         <Row className="mt-4 text-center">
           <Col>
-            <p>© 2025 Opremum Lixyry. All Rights Reserved.</p>
+            <p>© {new Date().getFullYear()} Rolls Royce Transfers. All Rights Reserved.</p>
           </Col>
         </Row>
       </Container>

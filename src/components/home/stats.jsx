@@ -4,6 +4,7 @@ import CountUp from "react-countup";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import "./home.css";
+import { FaStar } from "react-icons/fa";
 
 const Stats = () => {
     const stats = [
@@ -41,7 +42,7 @@ const Stats = () => {
 
                 <Row className="mt-5 justify-content-evenly">
                     {stats.map((stat, idx) => (
-                        <Col md={2} xs={6} key={idx} className="mb-4">
+                        <Col lg={2} md={4} sm={6} xs={12} key={idx} className="mb-4">
                             <div className="stat-card">
                                 <h3 className="stat-number">
                                     {inView && (
@@ -58,7 +59,12 @@ const Stats = () => {
                                         </motion.span>
                                     )}{" "}
                                     {stat.suffix}
+
+                                    {stat.label === "Customer Ratings" && (
+                                        <FaStar style={{ color: "#c0a062", marginLeft: "6px" }} />
+                                    )}
                                 </h3>
+
                                 <p className="stat-label">{stat.label}</p>
                             </div>
                         </Col>

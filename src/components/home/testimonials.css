@@ -37,6 +37,8 @@
   border-radius: 12px !important;
   padding: 20px !important;
   transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
   height: 100%;
 }
 
@@ -74,7 +76,12 @@
   font-size: 0.95rem;
   color: #ddd;
   margin: 15px 0;
-  min-height: 80px;
+  min-height: 5.53m;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .testimonial-footer {
@@ -93,25 +100,9 @@
   color: #aaa;
 }
 
-/* Slick Arrows */
-.slick-prev,
-.slick-next {
-  background: #1a1a1a !important;
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  z-index: 10;
-  transition: all 0.3s ease;
-}
-
-.slick-prev:hover,
-.slick-next:hover {
-  background: #c0a062 !important;
-  color: #000 !important;
-}
-
-.slick-prev:before,
-.slick-next:before {
-  color: #fff;
-  font-size: 20px;
+@media (max-width: 576px) {
+  .testimonial-text {
+    -webkit-line-clamp: 4;
+    min-height: 4.4em;
+  }
 }

@@ -1,0 +1,78 @@
+html,
+body {
+  width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  background: #000;
+}
+
+.page-content {
+  padding-top: 150px;
+  background-color: #111111;
+}
+
+.global-swiper {
+  --swiper-navigation-size: 18px;
+}
+
+.global-swiper .swiper-button-prev,
+.global-swiper .swiper-button-next {
+  width: 20px;
+  height: 20px;
+  padding: 6px;
+  box-sizing: content-box;
+  border-radius: 999px;
+  color: rgba(17, 17, 17, 0.7);
+  border: 1px solid rgba(247, 201, 66, 0.45);
+  background: #f7c942;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: background 0.25s, color 0.25s, transform 0.18s, box-shadow 0.25s,
+    border-color 0.25s;
+}
+
+.global-swiper .swiper-button-prev::after,
+.global-swiper .swiper-button-next::after {
+  font-size: var(--swiper-navigation-size) !important;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.global-swiper .swiper-button-prev:hover,
+.global-swiper .swiper-button-next:hover {
+  color: #f7c942;
+  background: #111;
+  border-color: #f7c942;
+  transform: translateY(-1px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(247, 201, 66, 0.25);
+}
+
+.global-swiper .swiper-button-prev {
+  left: 8px;
+}
+.global-swiper .swiper-button-next {
+  right: 8px;
+}
+
+@media (max-width: 576px) {
+  .global-swiper .swiper-button-prev,
+  .global-swiper .swiper-button-next {
+    width: 20px;
+    height: 20px;
+    padding: 4px;
+  }
+  .global-swiper {
+    --swiper-navigation-size: 16px;
+  }
+}
+
+.global-swiper .swiper-wrapper {
+  align-items: stretch; /* stretch slides to the tallest in view */
+}
+.global-swiper .swiper-slide {
+  height: auto; /* let the card define the height */
+  display: flex; /* allows child to stretch */
+}
+.global-swiper .swiper-slide > * {
+  width: 100%;
+}
