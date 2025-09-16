@@ -110,14 +110,14 @@ const Contact = () => {
                                     <i className="bi bi-telephone-fill"></i>
                                     <div>
                                         <h5>Phone</h5>
-                                        <p>+971 55 123 4567</p>
+                                        <p>+971 50 701 2953</p>
                                     </div>
                                 </div>
                                 <div className="info-box">
                                     <i className="bi bi-envelope-fill"></i>
                                     <div>
                                         <h5>Email</h5>
-                                        <p>contact@luxurychauffeur.ae</p>
+                                        <p>info@rollsroycetransfers.com</p>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +135,7 @@ const Contact = () => {
                         <Col md={4}>
                             <i className="bi bi-headset"></i>
                             <h5>Emergency Chauffeur Support</h5>
-                            <p>24/7 Hotline: +971 55 999 8888</p>
+                            <p>24/7 Hotline: +971 50 701 2953</p>
                         </Col>
                         <Col md={4}>
                             <i className="bi bi-share-fill"></i>

@@ -1,36 +1,59 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Nav, Navbar, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./navbar.css";
 import logo from "../../images/main-logo-no-bg.png";
 import BookingForm from "../booking/bookingForm";
 
 const LuxuryNavbar = () => {
+  const [expanded, setExpanded] = useState(false);
   const [showBooking, setShowBooking] = useState(false);
+  const location = useLocation();
+
+  // Auto-collapse when the route changes
+  useEffect(() => {
+    setExpanded(false);
+  }, [location.pathname]);
+
+  const closeMenu = () => setExpanded(false);
 
   return (
     <>
-      <Navbar expand="lg" className="luxury-navbar fixed-top" variant="dark">
+      <Navbar
+        expand="lg"
+        variant="dark"
+        className="luxury-navbar fixed-top"
+        expanded={expanded}
+        onToggle={setExpanded}
+      >
         <Container>
-          <Navbar.Brand as={Link} to="/" className="luxury-logo">
+          <Navbar.Brand
+            as={Link}
+            to="/"
+            className="luxury-logo"
+            onClick={closeMenu}
+          >
             <img src={logo} alt="Chauffeur Logo" />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbar-nav" />
+
           <Navbar.Collapse id="navbar-nav">
             <Nav className="mx-auto luxury-nav-links">
-              <Nav.Link as={Link} to="/">Home</Nav.Link>
-              <Nav.Link as={Link} to="/about">About Us</Nav.Link>
-              <Nav.Link as={Link} to="/faq">FAQ</Nav.Link>
-              <Nav.Link as={Link} to="/contact">Contact</Nav.Link>
+              <Nav.Link as={Link} to="/" onClick={closeMenu}>Home</Nav.Link>
+              <Nav.Link as={Link} to="/about" onClick={closeMenu}>About Us</Nav.Link>
+              <Nav.Link as={Link} to="/faq" onClick={closeMenu}>FAQ</Nav.Link>
+              <Nav.Link as={Link} to="/contact" onClick={closeMenu}>Contact</Nav.Link>
             </Nav>
 
-            {/* Right side buttons */}
             <div className="auth-buttons">
               <Button
                 variant="warning"
                 className="auth-btn ms-2"
-                onClick={() => setShowBooking(true)}
+                onClick={() => {
+                  setShowBooking(true);
+                  closeMenu();
+                }}
               >
                 Book Now
               </Button>

@@ -99,7 +99,7 @@ const Testimonials = () => {
                                         <div className="testimonial-footer">
                                             <span className="rating">
                                                 {item.rating}/5{" "}
-                                                {[...Array(5)].map((_, i) => (
+                                                {[...Array(1)].map((_, i) => (
                                                     <FaStar
                                                         key={i}
                                                         color={i < Math.round(item.rating) ? "#FFD700" : "#555"}

@@ -76,10 +76,10 @@
   font-size: 0.95rem;
   color: #ddd;
   margin: 15px 0;
-  min-height: 5.53m;
+  min-height: 7.5em;
   flex: 1;
   display: -webkit-box;
-  -webkit-line-clamp: 5;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -102,7 +102,7 @@
 
 @media (max-width: 576px) {
   .testimonial-text {
-    -webkit-line-clamp: 4;
-    min-height: 4.4em;
+    -webkit-line-clamp: 6;
+    min-height: 10.4em;
   }
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import { FaWhatsapp, FaPhone } from "react-icons/fa";
@@ -46,23 +46,18 @@ const vehicles = [
         id: "rolls-royce-phantom",
         name: "Rolls Royce Phantom",
         img: [RRPhantom1, RRPhantom2],
-        perks: [
-            "Iconic Luxury",
-            "On-demand Chauffeur",
-            "Complimentary refreshments"
-        ],
+        perks: ["Iconic Luxury", "On-demand Chauffeur", "Complimentary refreshments"],
         description:
             "The Rolls Royce Phantom is the pinnacle of automotive luxury, symbolizing power, prestige, and authority. With its commanding design, handcrafted interiors, and unmatched ride comfort, the Phantom ensures you arrive with a statement. Whether it’s high-profile meetings, elite events, or personal indulgence, the Phantom transforms every trip into an unforgettable occasion with timeless Rolls Royce elegance."
     },
     {
         id: "rolls-royce-cullinan",
         name: "Rolls Royce Cullinan",
-        img: [RRCullinan1, RRCullinan2, RRCullinan3, RRCullinan4, RRCullinan5, RRCullinan6, RRCullinan7, RRCullinan8, RRCullinan9, RRCullinan10, RRCullinan11, RRCullinan12, RRCullinan13, RRCullinan14],
-        perks: [
-            "Spacious SUV",
-            "Perfect for Long Journeys",
-            "Complimentary water & WiFi"
+        img: [
+            RRCullinan1, RRCullinan2, RRCullinan3, RRCullinan4, RRCullinan5, RRCullinan6, RRCullinan7,
+            RRCullinan8, RRCullinan9, RRCullinan10, RRCullinan11, RRCullinan12, RRCullinan13, RRCullinan14
         ],
+        perks: ["Spacious SUV", "Perfect for Long Journeys", "Complimentary water & WiFi"],
         description:
             "The Rolls Royce Cullinan redefines the luxury SUV experience. It blends commanding road presence with unmatched comfort, making it ideal for long drives, desert adventures, or city cruising. Its spacious interior provides maximum comfort while offering the sophistication and refinement that only Rolls Royce can deliver. Whether it’s a family trip or an elite business transfer, the Cullinan ensures every journey is both powerful and indulgent."
     }
@@ -70,7 +65,9 @@ const vehicles = [
 
 const VehicleDetail = () => {
     const { id } = useParams();
-    const vehicle = vehicles.find(v => v.id === id);
+    const vehicle = vehicles.find((v) => v.id === id);
+
+    const [activeIdx, setActiveIdx] = useState(0);   // <-- track selected image
 
     if (!vehicle) {
         return (
@@ -82,14 +79,11 @@ const VehicleDetail = () => {
 
     const handleWhatsApp = () => {
         const msg = `Hello, I'm interested in booking the ${vehicle.name}`;
-        window.open(
-            `https://wa.me/971555153069?text=${encodeURIComponent(msg)}`,
-            "_blank"
-        );
+        window.open(`https://wa.me/971507012953?text=${encodeURIComponent(msg)}`, "_blank");
     };
 
     const handleCall = () => {
-        window.location.href = "tel:+971555153069";
+        window.location.href = "tel:+971507012953";
     };
 
     return (
@@ -99,17 +93,24 @@ const VehicleDetail = () => {
                 <Col md={7} className="mb-4">
                     <div className="vehicle-gallery">
                         <img
-                            src={vehicle.img[0]}
+                            src={vehicle.img[activeIdx]}        // <-- show selected image
                             alt={vehicle.name}
                             className="img-fluid main-img"
                         />
-                        <div className="thumb-row mt-2 d-flex gap-2">
+
+                        <div className="thumb-row">
                             {vehicle.img.map((src, i) => (
                                 <img
                                     key={i}
                                     src={src}
-                                    alt={vehicle.name}
-                                    className="thumb-img"
+                                    loading="lazy"
+                                    alt={`${vehicle.name} - ${i + 1}`}
+                                    className={`thumb-img ${i === activeIdx ? "active" : ""}`}
+                                    onClick={() => setActiveIdx(i)}  // <-- swap on click
+                                    role="button"
+                                    tabIndex={0}
+                                    onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveIdx(i)}
+                                    // aria-selected={i === activeIdx}
                                 />
                             ))}
                         </div>
@@ -120,16 +121,12 @@ const VehicleDetail = () => {
                 <Col md={5}>
                     <h2 className="vehicle-title mb-3">{vehicle.name}</h2>
 
-                    {/* Perks in card style */}
                     <div className="perks-box mb-3">
                         {vehicle.perks.map((p, i) => (
-                            <div key={i} className="perk-item">
-                                ✔ {p}
-                            </div>
+                            <div key={i} className="perk-item">✔ {p}</div>
                         ))}
                     </div>
 
-                    {/* Actions */}
                     <div className="vehicle-actions">
                         <Button className="btn btn-whatsapp" onClick={handleWhatsApp}>
                             <FaWhatsapp /> WhatsApp
@@ -141,7 +138,7 @@ const VehicleDetail = () => {
                 </Col>
             </Row>
 
-            {/* Full width Description below */}
+            {/* Description */}
             <Row className="mt-5">
                 <Col>
                     <div className="vehicle-description-box">

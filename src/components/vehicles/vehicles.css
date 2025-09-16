@@ -1,4 +1,3 @@
-
 /* ============================= */
 /* Vehicle cards */
 /* ============================= */
@@ -202,4 +201,66 @@
   font-size: 1rem;
   line-height: 1.7;
   color: #ccc;
+}
+
+/* Main image keeps layout stable */
+.vehicle-gallery .main-img {
+  border-radius: 10px;
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+}
+
+/* Horizontal, scrollable thumbnails */
+.thumb-row {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto; /* scroll instead of overflow off-screen */
+  padding: 10px 2px 2px;
+  margin-top: 8px;
+  scroll-snap-type: x proximity; /* smooth snap feel */
+}
+
+.thumb-row::-webkit-scrollbar {
+  height: 8px;
+}
+.thumb-row::-webkit-scrollbar-thumb {
+  background: rgba(247, 201, 66, 0.35);
+  border-radius: 6px;
+}
+
+/* Thumbs */
+.thumb-img {
+  width: 90px;
+  height: 64px;
+  border-radius: 6px;
+  object-fit: cover;
+  cursor: pointer;
+  flex: 0 0 auto; /* prevent shrinking; keep size */
+  border: 1px solid transparent;
+  opacity: 0.9;
+  transition: transform 0.2s, border-color 0.2s, opacity 0.2s, box-shadow 0.2s;
+  scroll-snap-align: start;
+}
+
+.thumb-img:hover {
+  transform: scale(1.03);
+  opacity: 1;
+}
+
+.thumb-img.active {
+  border-color: #f7c942;
+  box-shadow: 0 0 0 2px rgba(247, 201, 66, 0.35);
+  opacity: 1;
+}
+
+/* Smaller thumbs on very small screens */
+@media (max-width: 576px) {
+  .vehicle-gallery .main-img {
+    height: 320px;
+  }
+  .thumb-img {
+    width: 76px;
+    height: 54px;
+  }
 }

@@ -30,7 +30,7 @@ const Footer = () => {
           <Col md={3}>
             <h5 className="footer-brand">Contact</h5>
             <p>Email: info@rollsroycetransfers.com</p>
-            <p>Phone: +971 55 515 3069</p>
+            <p>Phone: +971 50 701 29539</p>
             <div className="footer-socials">
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
                 <i className="bi bi-instagram"></i>

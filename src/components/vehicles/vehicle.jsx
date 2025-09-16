@@ -19,10 +19,10 @@ const vehicles = [
 const CarShowcase = () => {
     const handleWhatsApp = (vehicle) => {
         const msg = `Hello, I'm interested in booking the ${vehicle.name}`;
-        window.open(`https://wa.me/971555153069?text=${encodeURIComponent(msg)}`, "_blank");
+        window.open(`https://wa.me/971507012953?text=${encodeURIComponent(msg)}`, "_blank");
     };
 
-    const handleCall = () => (window.location.href = "tel:+971555153069");
+    const handleCall = () => (window.location.href = "tel:+971507012953");
 
     return (
         <section className="luxury-services py-5">

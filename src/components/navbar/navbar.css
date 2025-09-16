@@ -27,3 +27,8 @@
   border-radius: 20px;
   padding: 6px 16px;
 }
+
+.navbar-toggler {
+  border-color: #f7c942;
+  background: #C0A062 !important;
+}
