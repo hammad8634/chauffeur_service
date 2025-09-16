@@ -22,7 +22,7 @@ const About = () => {
                     <Row className="align-items-center">
                         <Col md={6} className="mb-4">
                             <img
-                                src="https://www.vhv.rs/dpng/d/493-4939555_white-lincoln-town-car-stock-photo-limousine-hd.png"
+                                src="https://robbreport.com/wp-content/uploads/2025/09/P90549007_highRes_rolls-royce-cullinan-e1757453686113.jpg?w=1000"
                                 alt="Luxury Chauffeur"
                                 className="img-fluid rounded about-img"
                             />
