@@ -23,7 +23,6 @@
   transform: translateY(-3px);
   box-shadow: 0 6px 18px rgba(212, 175, 55, 0.5);
 }
-
 /* Hero Section */
 .hero-section {
   padding-bottom: 60px;
@@ -51,7 +50,7 @@
 /* Booking Form */
 .booking-form {
   background: rgba(20, 20, 20, 0.85);
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(1px);
   border-radius: 16px;
   padding: 25px 30px;
   border: 1px solid rgba(192, 160, 98, 0.3);
@@ -104,17 +103,58 @@
   box-shadow: 0 6px 18px rgba(212, 175, 55, 0.6);
   transform: translateY(-2px);
 }
+/* Hero Section: gradient only */
+.hero-section {
+  --car-width: clamp(420px, 48vw, 820px); /* responsive car width */
+  --car-aspect: 2; /* width / height of the PNG (adjust if needed) */
+  --car-height: calc(var(--car-width) / var(--car-aspect));
 
-/* Car Image */
-.hero-car {
-  margin-top: 30px;
+  position: relative;
+  color: #fff;
+  background: linear-gradient(to bottom, #000, #111);
+  /* Make room for the car under the form/text */
+  padding: 10px 0 calc(var(--car-height) + 0px);
 }
 
-.hero-car .car-img {
-  max-width: 60%; /* smaller image */
-  height: auto;
-  margin: 0 auto;
-  display: block;
+/* Car image as a layer, bottom center, fully responsive */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0; /* “roof touches” the form area above */
+  transform: translateX(-50%);
+  width: var(--car-width);
+  aspect-ratio: var(--car-aspect);
+  background: url("https://pngimg.com/uploads/rolls_royce/rolls_royce_PNG18.png")
+    no-repeat center / 100% 100%;
+  pointer-events: none; /* never blocks form clicks */
+  z-index: 0;
+}
+
+/* Lift the booking form a bit so it sits right above the roof */
+.booking-wrap {
+  transform: translateY(-22px);
+  position: relative;
+  z-index: 1; /* above the car layer */
+}
+
+/* Keep your existing title/subtitle spacing */
+.hero-title {
+  margin-bottom: 10px;
+}
+.hero-subtitle {
+  margin-bottom: 28px;
+}
+
+/* Optional: tune for small screens */
+@media (max-width: 768px) {
+  .hero-section {
+    --car-width: clamp(340px, 78vw, 560px);
+    padding: 10px 0 calc(var(--car-height) + 70px);
+  }
+  .booking-wrap {
+    transform: translateY(-14px);
+  }
 }
 
 /* Explore & Popular Search */

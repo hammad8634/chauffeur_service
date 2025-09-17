@@ -6,6 +6,7 @@ import Stats from "./stats";
 import LuxuryServices from "./luxuryServices";
 import BookingForm from "../booking/bookingForm";
 import VehiclesCarousel from "../vehicles/vehicle";
+import RideWithUsImg from "../../images/cullinan.jpg";
 
 const Home = () => {
     return (
@@ -13,8 +14,6 @@ const Home = () => {
             {/* Hero Section */}
             <section className="hero-section text-center">
                 <Container>
-                    <br />
-                    <br /><br />
                     <h1 className="hero-title">
                         Your <span className="highlight">Ultimate</span> Luxury Drive Awaits
                     </h1>
@@ -22,18 +21,13 @@ const Home = () => {
                         Rent the world's finest cars and redefine luxury travel.
                     </p>
 
-                    <BookingForm />
-
-                    <div className="hero-car">
-                        <img
-                            src="https://pngimg.com/uploads/rolls_royce/rolls_royce_PNG18.png"
-                            alt="Luxury Car"
-                            className="car-img"
-                        />
+                    {/* Lift the form slightly above with a class */}
+                    <div className="booking-wrap">
+                        <BookingForm />
                     </div>
-
                 </Container>
             </section>
+
 
             <VehiclesCarousel />
             <LuxuryServices />
@@ -95,7 +89,7 @@ const Home = () => {
                         <Col md={5}>
                             <div className="benefits-image">
                                 <img
-                                    src="https://images.unsplash.com/photo-1533473359331-0135ef1b58bf"
+                                    src={RideWithUsImg}
                                     alt="Luxury Chauffeur"
                                     className="img-fluid"
                                 />

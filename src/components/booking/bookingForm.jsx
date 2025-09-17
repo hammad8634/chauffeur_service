@@ -3,12 +3,13 @@ import { Row, Col, Button, Form, Modal, Container } from "react-bootstrap";
 import {
   FaMapMarkerAlt,
   FaCalendarAlt,
-  FaPhone,
+  FaPhoneAlt,
   FaEnvelope,
   FaUser,
   FaCommentDots,
 } from "react-icons/fa";
 import "./bookingForm.css";
+import emailjs from "@emailjs/browser";
 
 const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
   const [formData, setFormData] = useState({
@@ -34,16 +35,35 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
   const handleModalChange = (e) =>
     setModalData({ ...modalData, [e.target.name]: e.target.value });
 
-  const handleSubmit = () => {
-    // validate mandatory 3 fields
+  const handleSubmit = async () => {
     if (!formData.location || !formData.pickupTime || !formData.phone) {
       alert("Please fill Location, Pickup Time and Phone before submitting.");
       return;
     }
 
-    const finalData = { ...formData, ...modalData };
-    console.log("Booking Data:", finalData);
-    setActualShow(false);
+    const params = {
+      to_email: "info@rollsroycetransfers.com",
+      location: formData.location,
+      pickup_time: formData.pickupTime,
+      phone: formData.phone,
+      user_email: modalData.email,
+      full_name: modalData.fullName,
+      comments: modalData.comments,
+    };
+
+    try {
+      await emailjs.send(
+        "YOUR_SERVICE_ID",   // e.g. service_el5zkq5
+        "YOUR_TEMPLATE_ID",  // your template
+        params,
+        "YOUR_PUBLIC_KEY"    // EmailJS public key
+      );
+      alert("Thanks! Your booking request has been sent.");
+      setActualShow(false);
+    } catch (e) {
+      console.error(e);
+      alert("Could not send your request. Please try again.");
+    }
   };
 
   return (
@@ -85,7 +105,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
 
             <Col md={4} xs={12}>
               <div className="luxury-input">
-                <FaPhone className="luxury-icon" />
+                <FaPhoneAlt className="luxury-icon" />
                 <Form.Control
                   type="tel"
                   placeholder="Phone Number"
@@ -161,7 +181,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                   </Col>
                   <Col lg={6} xs={12}>
                     <div className="luxury-input">
-                      <FaPhone className="luxury-icon" />
+                      <FaPhoneAlt className="luxury-icon" />
                       <Form.Control
                         type="tel"
                         placeholder="Phone Number"
@@ -174,7 +194,6 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                 </>
               )}
 
-              {/* Home mode → show first 3 fields as readonly inside modal */}
               {mode === "home" && (
                 <>
                   <Col lg={6} xs={12}>
@@ -191,7 +210,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                   </Col>
                   <Col lg={6} xs={12}>
                     <div className="luxury-input readonly">
-                      <FaPhone className="luxury-icon" />
+                      <FaPhoneAlt className="luxury-icon" />
                       <Form.Control value={formData.phone} readOnly />
                     </div>
                   </Col>
