@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container } from "react-bootstrap";
 
 // Swiper
@@ -6,8 +6,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
-
 import "./luxuryServices.css";
+import BookingForm from "../booking/bookingForm";
 
 const services = [
     {
@@ -53,6 +53,9 @@ const services = [
 ];
 
 const LuxuryServices = () => {
+
+    const [showBooking, setShowBooking] = useState(false);
+
     return (
         <section className="luxury-services py-5">
             <Container>
@@ -67,16 +70,18 @@ const LuxuryServices = () => {
                     autoplay={{ delay: 2500, disableOnInteraction: false }}
                     speed={800}
                     spaceBetween={24}
-                    slidesPerView={1}                 // mobile first
+                    slidesPerView={1}
                     breakpoints={{
-                        768: { slidesPerView: 2 },      // ≥768px (tablet)
-                        992: { slidesPerView: 3 },      // ≥992px (desktop)
+                        768: { slidesPerView: 2 },
+                        992: { slidesPerView: 3 },
                     }}
                     className="global-swiper"
                 >
                     {services.map((service, idx) => (
                         <SwiperSlide key={idx}>
-                            <div className="service-card-carousel">
+                            <div className="service-card-carousel" onClick={() => {
+                                setShowBooking(true);
+                            }}>
                                 <img src={service.img} alt={service.title} className="service-img" />
                                 <div className="service-content">
                                     <h5 className="service-title">{service.title}</h5>
@@ -87,6 +92,8 @@ const LuxuryServices = () => {
                     ))}
                 </Swiper>
             </Container>
+            <BookingForm mode="navbar" showExternal={showBooking} setShowExternal={setShowBooking} />
+
         </section>
     );
 };

@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Button, Row, Col } from "react-bootstrap";
-import { FaWhatsapp, FaPhone } from "react-icons/fa";
+import { FaWhatsapp, FaPhoneAlt, FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./vehicles.css";
 
 import RRGhost1 from "../../images/rolls-royce-ghost/rolls-royce-ghost-1.jpg";
@@ -67,7 +67,49 @@ const VehicleDetail = () => {
     const { id } = useParams();
     const vehicle = vehicles.find((v) => v.id === id);
 
-    const [activeIdx, setActiveIdx] = useState(0);   // <-- track selected image
+    const [activeIdx, setActiveIdx] = useState(0);
+
+    const startXRef = useRef(0);
+    const draggingRef = useRef(false);
+    const SWIPE_THRESHOLD = 50;
+
+    const nextImage = () =>
+        setActiveIdx((i) => (i + 1) % vehicle.img.length);
+
+    const prevImage = () =>
+        setActiveIdx((i) => (i - 1 + vehicle.img.length) % vehicle.img.length);
+
+    const onPointerDown = (e) => {
+        const target = e.target;
+        if (
+            target.closest?.(".gallery-arrow") ||
+            target.closest?.(".thumb-img")
+        ) {
+            return;
+        }
+        if (e.button !== 0 && e.pointerType === "mouse") return;
+        draggingRef.current = true;
+        startXRef.current = e.clientX ?? 0;
+    };
+    const onPointerUp = (e) => {
+        if (!draggingRef.current) return;
+        const delta = (e.clientX ?? 0) - startXRef.current;
+        draggingRef.current = false;
+
+        if (Math.abs(delta) > SWIPE_THRESHOLD) {
+            if (delta > 0) prevImage();
+            else nextImage();
+        }
+    };
+
+    const onPointerCancel = () => {
+        draggingRef.current = false;
+    };
+
+    const onKeyDownMain = (e) => {
+        if (e.key === "ArrowLeft") prevImage();
+        if (e.key === "ArrowRight") nextImage();
+    };
 
     if (!vehicle) {
         return (
@@ -89,14 +131,44 @@ const VehicleDetail = () => {
     return (
         <Container className="py-5 text-white vehicle-detail-page">
             <Row>
-                {/* Left: Image Gallery */}
                 <Col md={7} className="mb-4">
                     <div className="vehicle-gallery">
-                        <img
-                            src={vehicle.img[activeIdx]}        // <-- show selected image
-                            alt={vehicle.name}
-                            className="img-fluid main-img"
-                        />
+                        <div
+                            className="main-img-wrap"
+                            role="group"
+                            aria-label="Vehicle image gallery"
+                            tabIndex={0}
+                            onKeyDown={onKeyDownMain}
+                            onPointerDown={onPointerDown}
+                            onPointerUp={onPointerUp}
+                            onPointerCancel={onPointerCancel}
+                        >
+                            <button
+                                type="button"
+                                className="gallery-arrow gallery-arrow-left"
+                                aria-label="Previous image"
+                                onClick={prevImage}
+                            >
+                                <FaChevronLeft />
+                            </button>
+
+                            <img
+                                src={vehicle.img[activeIdx]}
+                                alt={vehicle.name}
+                                className="img-fluid main-img"
+                                draggable={false}
+                                onDragStart={(e) => e.preventDefault()}
+                            />
+
+                            <button
+                                type="button"
+                                className="gallery-arrow gallery-arrow-right"
+                                aria-label="Next image"
+                                onClick={nextImage}
+                            >
+                                <FaChevronRight />
+                            </button>
+                        </div>
 
                         <div className="thumb-row">
                             {vehicle.img.map((src, i) => (
@@ -106,21 +178,18 @@ const VehicleDetail = () => {
                                     loading="lazy"
                                     alt={`${vehicle.name} - ${i + 1}`}
                                     className={`thumb-img ${i === activeIdx ? "active" : ""}`}
-                                    onClick={() => setActiveIdx(i)}  // <-- swap on click
+                                    onClick={() => setActiveIdx(i)}
                                     role="button"
                                     tabIndex={0}
                                     onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && setActiveIdx(i)}
-                                    // aria-selected={i === activeIdx}
                                 />
                             ))}
                         </div>
                     </div>
                 </Col>
 
-                {/* Right: Details */}
                 <Col md={5}>
                     <h2 className="vehicle-title mb-3">{vehicle.name}</h2>
-
                     <div className="perks-box mb-3">
                         {vehicle.perks.map((p, i) => (
                             <div key={i} className="perk-item">✔ {p}</div>
@@ -132,13 +201,12 @@ const VehicleDetail = () => {
                             <FaWhatsapp /> WhatsApp
                         </Button>
                         <Button className="btn btn-call" onClick={handleCall}>
-                            <FaPhone /> Call
+                            <FaPhoneAlt /> Call
                         </Button>
                     </div>
                 </Col>
             </Row>
 
-            {/* Description */}
             <Row className="mt-5">
                 <Col>
                     <div className="vehicle-description-box">
