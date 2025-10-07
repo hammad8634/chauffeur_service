@@ -8,11 +8,12 @@ import LuxuryServices from "./luxuryServices";
 import BookingForm from "../booking/bookingForm";
 import VehiclesCarousel from "../vehicles/vehicle";
 import RideWithUsImg from "../../images/cullinan.jpg";
-import HDBgVideo1 from "../../images/hd-bg-main-video.mp4";
-import BGVideo1 from "../../images/bg-main-video.mp4";
-import BGVideo2 from "../../images/bg-video.mp4";
+// import HDBgVideo1 from "../../images/hd-bg-main-video.mp4";
+// import BGVideo1 from "../../images/bg-main-video.mp4";
+// import BGVideo2 from "../../images/bg-video.mp4";
 import InstagramReels from "../instagram/instagramReels";
 import ReelsGrid from "../instagram/instagramReels";
+import HeroVideo from "../media/HeroVideo";
 
 const Home = () => {
   return (
@@ -22,13 +23,31 @@ const Home = () => {
         <div className="hero-bg" aria-hidden="true">
           <video
             className="hero-video"
-            src={HDBgVideo1}
             autoPlay
             muted
             loop
             playsInline
             preload="metadata"
-          />
+            poster="/images/hero-poster.jpg"
+            aria-hidden="true"
+          >
+            {/* Mobile first */}
+            <source
+              src="/videos/hero-480p.webm"
+              type="video/webm"
+              media="(max-width: 600px)"
+            />
+            <source
+              src="/videos/hero-480p.mp4"
+              type="video/mp4"
+              media="(max-width: 600px)"
+            />
+
+            {/* Default / larger */}
+            <source src="/videos/hero-720p.webm" type="video/webm" />
+            <source src="/videos/hero-720p.mp4" type="video/mp4" />
+          </video>
+
           <div className="hero-overlay" />
         </div>
 
@@ -39,7 +58,6 @@ const Home = () => {
           <p className="hero-subtitle">
             Rent the world's finest cars and redefine luxury travel.
           </p>
-
           <div className="booking-wrap">
             <BookingForm />
           </div>
