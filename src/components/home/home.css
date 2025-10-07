@@ -105,48 +105,69 @@
 }
 /* Hero Section: gradient only */
 .hero-section {
-  --car-width: clamp(420px, 48vw, 820px); /* responsive car width */
-  --car-aspect: 2; /* width / height of the PNG (adjust if needed) */
-  --car-height: calc(var(--car-width) / var(--car-aspect));
-
   position: relative;
   color: #fff;
-  background: linear-gradient(to bottom, #000, #111);
-  /* Make room for the car under the form/text */
-  padding: 10px 0 calc(var(--car-height) + 0px);
+  padding: 70px 0 60px;
+  overflow: clip;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
 }
 
-/* Car image as a layer, bottom center, fully responsive */
-.hero-section::after {
-  content: "";
+.hero-bg {
   position: absolute;
-  left: 50%;
-  bottom: 0; /* “roof touches” the form area above */
-  transform: translateX(-50%);
-  width: var(--car-width);
-  aspect-ratio: var(--car-aspect);
-  background: url("https://pngimg.com/uploads/rolls_royce/rolls_royce_PNG18.png")
-    no-repeat center / 100% 100%;
-  pointer-events: none; /* never blocks form clicks */
+  inset: 0;
   z-index: 0;
 }
 
-/* Lift the booking form a bit so it sits right above the roof */
-.booking-wrap {
-  transform: translateY(-22px);
-  position: relative;
-  z-index: 1; /* above the car layer */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.75);
 }
 
-/* Keep your existing title/subtitle spacing */
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
 .hero-title {
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
   margin-bottom: 10px;
 }
-.hero-subtitle {
-  margin-bottom: 28px;
+
+.hero-title .highlight {
+  color: #c0a062;
 }
 
-/* Optional: tune for small screens */
+.hero-subtitle {
+  font-size: clamp(1rem, 2.2vw, 1.2rem);
+  margin-bottom: 28px;
+  color: #ddd;
+}
+
+/* Booking form elevation */
+.booking-wrap {
+  position: relative;
+  z-index: 2;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    animation: none !important;
+  }
+}
+
 @media (max-width: 768px) {
   .hero-section {
     --car-width: clamp(340px, 78vw, 560px);
@@ -484,6 +505,7 @@
 @media (max-width: 576px) {
   .benefit-box {
     padding: 12px 14px;
+    align-items: center !important;
   }
 }
 

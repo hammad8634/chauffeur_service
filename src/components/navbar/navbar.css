@@ -3,12 +3,14 @@
 }
 
 .luxury-navbar {
-  background: rgba(0, 0, 0, 0.9);
-  padding: 15px;
+  margin: 0px 1px 1px;
+  background: rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 2px gold;
+  padding: 0px;
 }
 
 .luxury-logo img {
-  height: 140px;
+  height: 110px;
   width: auto;
 }
 
@@ -35,4 +37,12 @@
 .navbar-toggler {
   border-color: #f7c942;
   background: #c0a062 !important;
+}
+
+.navbar-collapse.collapse {
+  text-align: center !important;
+}
+
+#navbar-nav {
+  text-align: center !important;
 }
