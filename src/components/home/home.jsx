@@ -8,8 +8,11 @@ import LuxuryServices from "./luxuryServices";
 import BookingForm from "../booking/bookingForm";
 import VehiclesCarousel from "../vehicles/vehicle";
 import RideWithUsImg from "../../images/cullinan.jpg";
+import HDBgVideo1 from "../../images/hd-bg-main-video.mp4";
 import BGVideo1 from "../../images/bg-main-video.mp4";
 import BGVideo2 from "../../images/bg-video.mp4";
+import InstagramReels from "../instagram/instagramReels";
+import ReelsGrid from "../instagram/instagramReels";
 
 const Home = () => {
   return (
@@ -19,7 +22,7 @@ const Home = () => {
         <div className="hero-bg" aria-hidden="true">
           <video
             className="hero-video"
-            src={BGVideo2}
+            src={HDBgVideo1}
             autoPlay
             muted
             loop
@@ -178,6 +181,42 @@ const Home = () => {
       </section>
 
       <Testimonials />
+
+      {/* <InstagramReels
+        title="Follow Us on Instagram"
+        limit={6}
+        reelUrls={[
+          "https://www.instagram.com/reel/DNqRX10v0_W/?hl=en",
+          "https://www.instagram.com/reel/DLLRYmjTaYu/?hl=en",
+          "https://www.instagram.com/reel/DIhJjEQSfGZ/?hl=en",
+          "https://www.instagram.com/reel/C_Vnd4XIk70/?hl=en",
+        ]}
+      /> */}
+
+      {/* <ReelsGrid
+        pageName="roadrunnerdxb"
+        columns={3}
+        items={[
+          {
+            id: "REEL_ID_1",
+            url: "https://www.instagram.com/reel/DNqRX10v0_W/?hl=en",
+            thumb:
+              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
+          },
+          {
+            id: "REEL_ID_2",
+            url: "https://www.instagram.com/reel/DLLRYmjTaYu/?hl=en",
+            thumb:
+              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
+          },
+          {
+            id: "REEL_ID_3",
+            url: "https://www.instagram.com/reel/C_Vnd4XIk70/?hl=en",
+            thumb:
+              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
+          },
+        ]}
+      /> */}
     </div>
   );
 };
