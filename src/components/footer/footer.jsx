@@ -1,6 +1,8 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./footer.css";
+import { Link } from "react-router-dom";
+import { Nav } from "react-bootstrap";
 
 const Footer = () => {
   return (
@@ -20,10 +22,26 @@ const Footer = () => {
           <Col md={3}>
             <h5 className="footer-brand">Quick Links</h5>
             <ul className="footer-links">
-              <li>Home</li>
-              <li>About Us</li>
-              <li>Contact</li>
-              <li>FAQ</li>
+              <li>
+                <Nav.Link as={Link} to="/">
+                  Home
+                </Nav.Link>
+              </li>
+              <li>
+                <Nav.Link as={Link} to="/about">
+                  About Us
+                </Nav.Link>
+              </li>
+              <li>
+                <Nav.Link as={Link} to="/contact">
+                  Contact
+                </Nav.Link>
+              </li>
+              <li>
+                <Nav.Link as={Link} to="/faq">
+                  FAQ
+                </Nav.Link>
+              </li>
             </ul>
           </Col>
 
