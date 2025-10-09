@@ -11,6 +11,8 @@ import BookingForm from "../booking/bookingForm";
 import AirportTransferImg from "../../images/services-img/airport.jpg";
 import WeddingsAndVIPEventImg from "../../images/services-img/weddings-and-vip.jpg";
 import HourlyChauffeurServiceImg from "../../images/services-img/hourly-chauffeur-service.jpg";
+import DubaiToursImg from "../../images/services-img/dubai-tours.jpg";
+import HotelPartnershipImg from "../../images/services-img/hotel-partnership.jpg";
 
 const services = [
   {
@@ -29,12 +31,12 @@ const services = [
     text: "Luxury arrival for brides, grooms, and red-carpet entrances.",
   },
   {
-    img: "https://t3.ftcdn.net/jpg/07/00/33/14/360_F_700331471_sKUGLWgakIK6YSE6TEblh32SgoF8dag1.jpg",
+    img: HotelPartnershipImg,
     title: "Hotel Partnerships",
     text: "Pick-ups from Business Bay, Downtown, Palm Jumeirah hotels.",
   },
   {
-    img: "https://protocoltourism.com/wp-content/uploads/2022/05/VIP-Chauffeur.jpg",
+    img: DubaiToursImg,
     title: "Dubai Tours in Style",
     text: "Burj Khalifa, Atlantis, Desert Safari, Marina, Palm Jumeirah.",
   },

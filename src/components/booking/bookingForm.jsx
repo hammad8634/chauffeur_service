@@ -252,7 +252,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                     </div>
                   </Col>
 
-                  <Col lg={12} xs={12}>
+                  <Col lg={6} xs={12}>
                     <CountryPhoneInput
                       countryCode={formData.countryCode}
                       phone={formData.phone}
@@ -334,7 +334,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                 </div>
               </Col>
 
-              <Col lg={12} xs={12}>
+              <Col lg={6} xs={12}>
                 <div className="luxury-input">
                   <FaCommentDots className="luxury-icon" />
                   <Form.Control
