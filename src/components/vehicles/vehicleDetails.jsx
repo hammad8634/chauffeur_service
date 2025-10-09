@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Modal } from "react-bootstrap";
 import {
   FaWhatsapp,
   FaPhoneAlt,
@@ -16,9 +16,9 @@ import RRGhost4 from "../../images/rolls-royce-ghost/rolls-royce-ghost-4.jpg";
 import RRGhost5 from "../../images/rolls-royce-ghost/rolls-royce-ghost-5.jpg";
 import RRGhost6 from "../../images/rolls-royce-ghost/rolls-royce-ghost-6.jpg";
 import RRGhost7 from "../../images/rolls-royce-ghost/rolls-royce-ghost-7.jpg";
+import RRGhost8 from "../../images/rolls-royce-ghost/rolls-royce-ghost-8.jpg";
 
-import RRPhantom1 from "../../images/rolls-royce-phantom/rolls-royce-phantom-1.jpg";
-import RRPhantom2 from "../../images/rolls-royce-phantom/rolls-royce-phantom-2.jpg";
+import RRPhantom1 from "../../images/rolls-royce-phantom/rolls-royce-phantom-1.png";
 
 import RRCullinan1 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-1.jpg";
 import RRCullinan2 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-2.jpg";
@@ -27,19 +27,21 @@ import RRCullinan4 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-
 import RRCullinan5 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-5.jpg";
 import RRCullinan6 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-6.jpg";
 import RRCullinan7 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-7.jpg";
-import RRCullinan8 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-8.jpg";
-import RRCullinan9 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-9.jpg";
-import RRCullinan10 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-10.jpg";
-import RRCullinan11 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-11.jpg";
-import RRCullinan12 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-12.jpg";
-import RRCullinan13 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-13.jpg";
-import RRCullinan14 from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-14.jpg";
 
 const vehicles = [
   {
     id: "rolls-royce-ghost",
     name: "Rolls Royce Ghost",
-    img: [RRGhost1, RRGhost2, RRGhost3, RRGhost4, RRGhost5, RRGhost6, RRGhost7],
+    img: [
+      RRGhost1,
+      RRGhost2,
+      RRGhost3,
+      RRGhost4,
+      RRGhost5,
+      RRGhost6,
+      RRGhost7,
+      RRGhost8,
+    ],
     perks: [
       "24x7 Support",
       "Unlimited Mileage",
@@ -53,7 +55,7 @@ const vehicles = [
   {
     id: "rolls-royce-phantom",
     name: "Rolls Royce Phantom",
-    img: [RRPhantom1, RRPhantom2],
+    img: [RRPhantom1],
     perks: [
       "Iconic Luxury",
       "On-demand Chauffeur",
@@ -73,13 +75,6 @@ const vehicles = [
       RRCullinan5,
       RRCullinan6,
       RRCullinan7,
-      RRCullinan8,
-      RRCullinan9,
-      RRCullinan10,
-      RRCullinan11,
-      RRCullinan12,
-      RRCullinan13,
-      RRCullinan14,
     ],
     perks: [
       "Spacious SUV",
@@ -96,6 +91,7 @@ const VehicleDetail = () => {
   const vehicle = vehicles.find((v) => v.id === id);
 
   const [activeIdx, setActiveIdx] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
 
   const startXRef = useRef(0);
   const draggingRef = useRef(false);
@@ -105,6 +101,9 @@ const VehicleDetail = () => {
 
   const prevImage = () =>
     setActiveIdx((i) => (i - 1 + vehicle.img.length) % vehicle.img.length);
+
+  const openLightbox = () => setLightboxOpen(true);
+  const closeLightbox = () => setLightboxOpen(false);
 
   const onPointerDown = (e) => {
     const target = e.target;
@@ -133,6 +132,7 @@ const VehicleDetail = () => {
   const onKeyDownMain = (e) => {
     if (e.key === "ArrowLeft") prevImage();
     if (e.key === "ArrowRight") nextImage();
+    if (e.key === "Enter") openLightbox();
   };
 
   if (!vehicle) {
@@ -185,6 +185,7 @@ const VehicleDetail = () => {
                 className="img-fluid main-img"
                 draggable={false}
                 onDragStart={(e) => e.preventDefault()}
+                onClick={openLightbox}
               />
 
               <button
@@ -237,6 +238,82 @@ const VehicleDetail = () => {
           </div>
         </Col>
       </Row>
+
+      <Modal
+        show={lightboxOpen}
+        onHide={closeLightbox}
+        centered
+        fullscreen
+        className="vehicle-lightbox"
+      >
+        <button
+          type="button"
+          className="lightbox-close"
+          aria-label="Close"
+          onClick={closeLightbox}
+        >
+          ×
+        </button>
+
+        <div
+          className="lightbox-stage"
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === "ArrowLeft") prevImage();
+            if (e.key === "ArrowRight") nextImage();
+            if (e.key === "Escape") closeLightbox();
+          }}
+          onPointerDown={(e) => {
+            if (e.button !== 0 && e.pointerType === "mouse") return;
+            draggingRef.current = true;
+            startXRef.current = e.clientX ?? 0;
+          }}
+          onPointerUp={(e) => {
+            if (!draggingRef.current) return;
+            const delta = (e.clientX ?? 0) - startXRef.current;
+            draggingRef.current = false;
+            if (Math.abs(delta) > SWIPE_THRESHOLD) {
+              if (delta > 0) prevImage();
+              else nextImage();
+            }
+          }}
+          onPointerCancel={() => (draggingRef.current = false)}
+        >
+          <button
+            type="button"
+            className="gallery-arrow gallery-arrow-left lightbox-arrow"
+            aria-label="Previous image"
+            onClick={prevImage}
+          >
+            <FaChevronLeft />
+          </button>
+
+          <img
+            src={vehicle.img[activeIdx]}
+            alt={`${vehicle.name} enlarged`}
+            className="lightbox-img"
+            draggable={false}
+            onDragStart={(e) => e.preventDefault()}
+          />
+
+          <button
+            type="button"
+            className="gallery-arrow gallery-arrow-right lightbox-arrow"
+            aria-label="Next image"
+            onClick={nextImage}
+          >
+            <FaChevronRight />
+          </button>
+        </div>
+
+        <button
+          type="button"
+          className="lightbox-close-bottom"
+          onClick={closeLightbox}
+        >
+          Close
+        </button>
+      </Modal>
 
       <Row className="mt-5">
         <Col>

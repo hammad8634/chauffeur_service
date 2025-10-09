@@ -11,11 +11,16 @@ import RideWithUsImg from "../../images/cullinan.jpg";
 // import HDBgVideo1 from "../../images/hd-bg-main-video.mp4";
 // import BGVideo1 from "../../images/bg-main-video.mp4";
 // import BGVideo2 from "../../images/bg-video.mp4";
-import InstagramReels from "../instagram/instagramReels";
-import ReelsGrid from "../instagram/instagramReels";
 import HeroVideo from "../media/HeroVideo";
+import InstaReels from "../social/InstaReels";
 
 const Home = () => {
+  // const reelUrls = [
+  // "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
+  // "https://www.instagram.com/rentacar.ae/p/DPUVHiFE_oN/",
+  // "https://www.instagram.com/rentacar.ae/p/DO6zam_iIYY/",
+  // ];
+
   return (
     <div className="home-page">
       {/* Hero Section */}
@@ -56,7 +61,7 @@ const Home = () => {
             <span className="highlight">Rolls Royce </span> Transfers
           </h1>
           <p className="hero-subtitle">
-            Rent the world's finest cars and redefine luxury travel.
+            Luxury Transfers with Professional Chauffeurs
           </p>
           <div className="booking-wrap">
             <BookingForm />
@@ -65,6 +70,15 @@ const Home = () => {
       </section>
 
       <VehiclesCarousel />
+
+      <InstaReels
+        title="Rolls Royce Moments"
+        urls={[
+          "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
+          "https://www.instagram.com/rentacar.ae/p/DPUVHiFE_oN/",
+          "https://www.instagram.com/rentacar.ae/p/DO6zam_iIYY/",
+        ]}
+      />
       <LuxuryServices />
 
       {/* How It Works Section */}
@@ -199,42 +213,6 @@ const Home = () => {
       </section>
 
       <Testimonials />
-
-      {/* <InstagramReels
-        title="Follow Us on Instagram"
-        limit={6}
-        reelUrls={[
-          "https://www.instagram.com/reel/DNqRX10v0_W/?hl=en",
-          "https://www.instagram.com/reel/DLLRYmjTaYu/?hl=en",
-          "https://www.instagram.com/reel/DIhJjEQSfGZ/?hl=en",
-          "https://www.instagram.com/reel/C_Vnd4XIk70/?hl=en",
-        ]}
-      /> */}
-
-      {/* <ReelsGrid
-        pageName="roadrunnerdxb"
-        columns={3}
-        items={[
-          {
-            id: "REEL_ID_1",
-            url: "https://www.instagram.com/reel/DNqRX10v0_W/?hl=en",
-            thumb:
-              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
-          },
-          {
-            id: "REEL_ID_2",
-            url: "https://www.instagram.com/reel/DLLRYmjTaYu/?hl=en",
-            thumb:
-              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
-          },
-          {
-            id: "REEL_ID_3",
-            url: "https://www.instagram.com/reel/C_Vnd4XIk70/?hl=en",
-            thumb:
-              "https://img.autocarindia.com/ExtraImages/20220112014450_RR_Ghost_black_badge.jpg",
-          },
-        ]}
-      /> */}
     </div>
   );
 };

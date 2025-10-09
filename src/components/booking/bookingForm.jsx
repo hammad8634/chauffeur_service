@@ -1,21 +1,77 @@
 import React, { useState } from "react";
-import { Row, Col, Button, Form, Modal, Container } from "react-bootstrap";
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  Modal,
+  Container,
+  InputGroup,
+  Dropdown,
+} from "react-bootstrap";
 import {
   FaMapMarkerAlt,
   FaCalendarAlt,
-  FaPhoneAlt,
   FaEnvelope,
   FaUser,
   FaCommentDots,
 } from "react-icons/fa";
 import "./bookingForm.css";
 import emailjs from "@emailjs/browser";
+import countries from "../../data/countries.json";
+
+const CountryPhoneInput = ({
+  countryCode,
+  phone,
+  onCodeChange,
+  onPhoneChange,
+}) => {
+  return (
+    <div className="luxury-input">
+      <InputGroup>
+        <Dropdown onSelect={(code) => onCodeChange(code)}>
+          <Dropdown.Toggle as={InputGroup.Text} className="code-toggle">
+            {countryCode || "+___"}
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu className="code-menu">
+            {countries.map((c) => (
+              <Dropdown.Item eventKey={c.dial_code} key={c.code}>
+                {c.name} ({c.dial_code})
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+
+        <Form.Control
+          type="tel"
+          placeholder="Phone Number"
+          name="phone"
+          value={phone}
+          onChange={(e) => onPhoneChange(e.target.value)}
+        />
+      </InputGroup>
+    </div>
+  );
+};
+
+const emirates = [
+  "Abu Dhabi",
+  "Dubai",
+  "Sharjah",
+  "Ajman",
+  "Umm Al Quwain",
+  "Ras Al Khaimah",
+  "Fujairah",
+];
 
 const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
   const [formData, setFormData] = useState({
-    location: "",
+    emirate: "",
     pickupTime: "",
     phone: "",
+    countryCode: "+971",
+    locationDetails: "",
   });
 
   const [modalData, setModalData] = useState({
@@ -26,37 +82,46 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
 
   const [show, setShow] = useState(false);
 
-  // Modal control (internal for home, external for navbar)
   const actualShow = mode === "navbar" ? showExternal : show;
   const setActualShow = mode === "navbar" ? setShowExternal : setShow;
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+
   const handleModalChange = (e) =>
     setModalData({ ...modalData, [e.target.name]: e.target.value });
 
   const handleSubmit = async () => {
-    if (!formData.location || !formData.pickupTime || !formData.phone) {
-      alert("Please fill Location, Pickup Time and Phone before submitting.");
+    if (!formData.emirate || !formData.pickupTime || !formData.phone) {
+      alert(
+        "Please select Emirate, Pickup Time and enter Phone before submitting."
+      );
       return;
     }
 
     const params = {
       to_email: "info@rollsroycetransfers.com",
-      location: formData.location,
+
+      location: formData.emirate,
       pickup_time: formData.pickupTime,
-      phone: formData.phone,
+
+      phone: `${formData.countryCode} ${formData.phone}`,
+
       user_email: modalData.email,
       full_name: modalData.fullName,
       comments: modalData.comments,
+
+      country_code: formData.countryCode,
+      emirate: formData.emirate,
+      location_details: formData.locationDetails,
     };
 
     try {
       await emailjs.send(
-        "YOUR_SERVICE_ID",   // e.g. service_el5zkq5
-        "YOUR_TEMPLATE_ID",  // your template
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
         params,
-        "YOUR_PUBLIC_KEY"    // EmailJS public key
+        "YOUR_PUBLIC_KEY"
       );
       alert("Thanks! Your booking request has been sent.");
       setActualShow(false);
@@ -68,7 +133,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
 
   return (
     <>
-      {/* Home Page Flow: Inline form for 3 quick fields */}
+      {/* Home Page Flow */}
       {mode === "home" && (
         <div className="booking-form mx-auto mb-5">
           <Row className="g-3">
@@ -76,21 +141,23 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
               <div className="luxury-input">
                 <FaMapMarkerAlt className="luxury-icon" />
                 <Form.Select
-                  name="location"
-                  value={formData.location}
+                  name="emirate"
+                  value={formData.emirate}
                   onChange={handleChange}
                 >
                   <option value="" disabled>
-                    Pick Up Location
+                    Emirate
                   </option>
-                  <option>Dubai Airport - Terminal 1</option>
-                  <option>Dubai Airport - Terminal 2</option>
-                  <option>Dubai Airport - Terminal 3</option>
-                  <option>Sharjah Airport</option>
+                  {emirates.map((e) => (
+                    <option key={e} value={e}>
+                      {e}
+                    </option>
+                  ))}
                 </Form.Select>
               </div>
             </Col>
 
+            {/* Date/Time */}
             <Col md={4} xs={12}>
               <div className="luxury-input">
                 <FaCalendarAlt className="luxury-icon" />
@@ -104,23 +171,27 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
             </Col>
 
             <Col md={4} xs={12}>
-              <div className="luxury-input">
-                <FaPhoneAlt className="luxury-icon" />
-                <Form.Control
-                  type="tel"
-                  placeholder="Phone Number"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                />
-              </div>
+              <CountryPhoneInput
+                countryCode={formData.countryCode}
+                phone={formData.phone}
+                onCodeChange={(code) =>
+                  setFormData((s) => ({ ...s, countryCode: code }))
+                }
+                onPhoneChange={(val) =>
+                  setFormData((s) => ({ ...s, phone: val }))
+                }
+              />
             </Col>
 
             <Col xs={12}>
               <Button
                 className="luxury-btn w-100"
                 onClick={() => {
-                  if (formData.location && formData.pickupTime && formData.phone) {
+                  if (
+                    formData.emirate &&
+                    formData.pickupTime &&
+                    formData.phone
+                  ) {
                     setShow(true);
                   } else {
                     alert("Please fill all required fields before proceeding.");
@@ -134,7 +205,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
         </div>
       )}
 
-      {/* Modal for both Home + Navbar */}
+      {/* Modal */}
       <Modal
         show={actualShow}
         onHide={() => setActualShow(false)}
@@ -147,27 +218,28 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
         <Modal.Body>
           <Container>
             <Row className="g-4">
-              {/* Navbar mode → show all 5 fields inside modal */}
               {mode === "navbar" && (
                 <>
                   <Col lg={6} xs={12}>
                     <div className="luxury-input">
                       <FaMapMarkerAlt className="luxury-icon" />
                       <Form.Select
-                        name="location"
-                        value={formData.location}
+                        name="emirate"
+                        value={formData.emirate}
                         onChange={handleChange}
                       >
                         <option value="" disabled>
-                          Pick Up Location
+                          Emirate
                         </option>
-                        <option>Dubai Airport - Terminal 1</option>
-                        <option>Dubai Airport - Terminal 2</option>
-                        <option>Dubai Airport - Terminal 3</option>
-                        <option>Sharjah Airport</option>
+                        {emirates.map((e) => (
+                          <option key={e} value={e}>
+                            {e}
+                          </option>
+                        ))}
                       </Form.Select>
                     </div>
                   </Col>
+
                   <Col lg={6} xs={12}>
                     <div className="luxury-input">
                       <FaCalendarAlt className="luxury-icon" />
@@ -179,17 +251,18 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                       />
                     </div>
                   </Col>
-                  <Col lg={6} xs={12}>
-                    <div className="luxury-input">
-                      <FaPhoneAlt className="luxury-icon" />
-                      <Form.Control
-                        type="tel"
-                        placeholder="Phone Number"
-                        name="phone"
-                        value={formData.phone}
-                        onChange={handleChange}
-                      />
-                    </div>
+
+                  <Col lg={12} xs={12}>
+                    <CountryPhoneInput
+                      countryCode={formData.countryCode}
+                      phone={formData.phone}
+                      onCodeChange={(code) =>
+                        setFormData((s) => ({ ...s, countryCode: code }))
+                      }
+                      onPhoneChange={(val) =>
+                        setFormData((s) => ({ ...s, phone: val }))
+                      }
+                    />
                   </Col>
                 </>
               )}
@@ -199,7 +272,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                   <Col lg={6} xs={12}>
                     <div className="luxury-input readonly">
                       <FaMapMarkerAlt className="luxury-icon" />
-                      <Form.Control value={formData.location} readOnly />
+                      <Form.Control value={formData.emirate} readOnly />
                     </div>
                   </Col>
                   <Col lg={6} xs={12}>
@@ -208,16 +281,22 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                       <Form.Control value={formData.pickupTime} readOnly />
                     </div>
                   </Col>
+
                   <Col lg={6} xs={12}>
-                    <div className="luxury-input readonly">
-                      <FaPhoneAlt className="luxury-icon" />
-                      <Form.Control value={formData.phone} readOnly />
-                    </div>
+                    <CountryPhoneInput
+                      countryCode={formData.countryCode}
+                      phone={formData.phone}
+                      onCodeChange={(code) =>
+                        setFormData((s) => ({ ...s, countryCode: code }))
+                      }
+                      onPhoneChange={(val) =>
+                        setFormData((s) => ({ ...s, phone: val }))
+                      }
+                    />
                   </Col>
                 </>
               )}
 
-              {/* Extra fields always */}
               <Col lg={6} xs={12}>
                 <div className="luxury-input">
                   <FaEnvelope className="luxury-icon" />
@@ -242,13 +321,26 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                   />
                 </div>
               </Col>
+
+              <Col lg={6} xs={12}>
+                <div className="luxury-input">
+                  <Form.Control
+                    type="text"
+                    placeholder="Location Details (Full Address)"
+                    name="locationDetails"
+                    value={formData.locationDetails}
+                    onChange={handleChange}
+                  />
+                </div>
+              </Col>
+
               <Col lg={12} xs={12}>
                 <div className="luxury-input">
                   <FaCommentDots className="luxury-icon" />
                   <Form.Control
                     as="textarea"
                     rows={3}
-                    placeholder="Comments"
+                    placeholder="(Optional) Comments"
                     name="comments"
                     value={modalData.comments}
                     onChange={handleModalChange}

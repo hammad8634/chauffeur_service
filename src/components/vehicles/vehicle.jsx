@@ -6,13 +6,12 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "./vehicles.css";
 import RRGhost from "../../images/rolls-royce-ghost/rolls-royce-ghost-1.jpg";
-import RRPhantom from "../../images/rolls-royce-phantom/rolls-royce-phantom-1.jpg";
+import RRPhantom from "../../images/rolls-royce-phantom/rolls-royce-phantom-1.png";
 import RRCullinan from "../../images/rolls-royce-cullinan/rolls-royce-cullinan-1.jpg";
 
 const vehicles = [
     { name: "Rolls Royce Ghost", img: RRGhost, details: ["Ghost White", "2-Tone Gold Roof", "VIP Choice"] },
     { name: "Rolls Royce Phantom", img: RRPhantom, details: ["Phantom White", "Timeless Elegance", "Boardroom Icon"] },
-    { name: "Rolls Royce Cullinan", img: RRCullinan, details: ["Luxury SUV", "Elite Comfort", "Perfect for Long Trips"] },
     { name: "Rolls Royce Cullinan", img: RRCullinan, details: ["Luxury SUV", "Elite Comfort", "Perfect for Long Trips"] },
 ];
 
