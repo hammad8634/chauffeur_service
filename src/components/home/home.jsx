@@ -12,14 +12,30 @@ import RideWithUsImg from "../../images/cullinan.jpg";
 // import BGVideo1 from "../../images/bg-main-video.mp4";
 // import BGVideo2 from "../../images/bg-video.mp4";
 import HeroVideo from "../media/HeroVideo";
-import InstaReels from "../social/InstaReels";
+import InstaFeedLite from "../social/InstaFeedLite";
+import instaThumbNail1 from "../../images/rolls-royce-ghost/rolls-royce-ghost-1.jpg";
 
 const Home = () => {
-  // const reelUrls = [
-  // "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
-  // "https://www.instagram.com/rentacar.ae/p/DPUVHiFE_oN/",
-  // "https://www.instagram.com/rentacar.ae/p/DO6zam_iIYY/",
-  // ];
+  const feedItems = [
+    {
+      url: "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
+      thumb: instaThumbNail1,
+      // title: "Ride in comfort with the best chauffeur service in the UAE.",
+      ratio: "1x1",
+    },
+    // {
+    //   url: "https://www.instagram.com/rollsroycetransfers/reel/<another-id>/",
+    //   thumb: "/images/insta/rr-another.jpg",
+    //   title: "Sunset Drive",
+    //   ratio: "9x16",
+    // },
+    // {
+    //   url: "https://www.instagram.com/rollsroycetransfers/p/<post-id>/",
+    //   thumb: "/images/insta/post-thumb.jpg",
+    //   title: "Fleet highlight",
+    //   ratio: "1x1",
+    // },
+  ];
 
   return (
     <div className="home-page">
@@ -71,14 +87,12 @@ const Home = () => {
 
       <VehiclesCarousel />
 
-      <InstaReels
+      <InstaFeedLite
         title="Rolls Royce Moments"
-        urls={[
-          "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
-          "https://www.instagram.com/rentacar.ae/p/DPUVHiFE_oN/",
-          "https://www.instagram.com/rentacar.ae/p/DO6zam_iIYY/",
-        ]}
+        subtitle="Follow our journeys in 9:16 luxury."
+        items={feedItems}
       />
+
       <LuxuryServices />
 
       {/* How It Works Section */}

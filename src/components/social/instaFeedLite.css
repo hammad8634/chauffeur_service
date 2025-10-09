@@ -1,0 +1,111 @@
+.insta-lite-title {
+  font-weight: 800;
+}
+.insta-lite-subtitle {
+  color: #6c757d;
+}
+
+/* Responsive grid: 1 / 2 / 3 */
+.insta-lite-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .insta-lite-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 992px) {
+  .insta-lite-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card base */
+.insta-lite-card {
+  position: relative;
+  display: block;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #0a0a0a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+  text-decoration: none;
+}
+
+/* Aspect ratios */
+.insta-lite-card.ratio-9x16 {
+  padding-top: 177.7778%;
+} /* 9:16 */
+.insta-lite-card.ratio-1x1 {
+  padding-top: 100%;
+} /* 1:1 */
+
+/* Media */
+.insta-lite-card img,
+.insta-lite-skeleton {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.insta-lite-skeleton {
+  background: linear-gradient(120deg, #121212, #101010 40%, #141414 60%);
+  animation: instaShimmer 1.2s infinite linear;
+}
+@keyframes instaShimmer {
+  0% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.15);
+  }
+  100% {
+    filter: brightness(1);
+  }
+}
+
+/* Overlay */
+.insta-lite-overlay {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 8px;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.25));
+}
+.insta-lite-card:hover .insta-lite-overlay {
+  opacity: 1;
+}
+
+.insta-lite-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #111;
+  font-size: 12px;
+  font-weight: 700;
+}
+.insta-lite-cta {
+  color: #e6ebff;
+  text-decoration: underline;
+  font-weight: 600;
+}
+
+/* Optional caption strip */
+.insta-lite-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0));
+}
