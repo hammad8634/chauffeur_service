@@ -17,6 +17,13 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Make CRA env vars available during the build
+      REACT_APP_EMAILJS_PUBLIC_KEY: ${{ vars.REACT_APP_EMAILJS_PUBLIC_KEY }}
+      REACT_APP_SERVICE_ID: ${{ vars.REACT_APP_SERVICE_ID }}
+      REACT_APP_TEMPLATE_ADMIN: ${{ vars.REACT_APP_TEMPLATE_ADMIN }}
+      REACT_APP_TEMPLATE_USER: ${{ vars.REACT_APP_TEMPLATE_USER }}
+      REACT_APP_ADMIN_EMAIL: ${{ vars.REACT_APP_ADMIN_EMAIL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,10 +31,12 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      # (Optional) sanity check that vars are present—prints names only, not values
+      - run: |
+          echo "Has PUBLIC_KEY? $([ -n \"$REACT_APP_EMAILJS_PUBLIC_KEY\" ] && echo yes || echo no)"
+          echo "Has SERVICE_ID? $([ -n \"$REACT_APP_SERVICE_ID\" ] && echo yes || echo no)"
       - run: npm run build
-      # Add your custom domain to the build output
       - run: echo 'www.rollsroycetransfers.com' > build/CNAME
-      # SPA refresh fix
       - run: cp build/index.html build/404.html
       - uses: actions/upload-pages-artifact@v3
         with:
