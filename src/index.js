@@ -12,6 +12,8 @@ import emailjs from "@emailjs/browser";
 emailjs.init({
   publicKey: process.env.REACT_APP_EMAILJS_PUBLIC_KEY,
 });
+// index.js (temporary)
+console.log("EMAILJS PUBLIC KEY:", process.env.REACT_APP_EMAILJS_PUBLIC_KEY);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
