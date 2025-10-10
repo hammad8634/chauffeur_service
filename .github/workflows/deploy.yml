@@ -19,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     env:
       # Make CRA env vars available during the build
-      REACT_APP_EMAILJS_PUBLIC_KEY: ${{ vars.REACT_APP_EMAILJS_PUBLIC_KEY }}
-      REACT_APP_SERVICE_ID: ${{ vars.REACT_APP_SERVICE_ID }}
-      REACT_APP_TEMPLATE_ADMIN: ${{ vars.REACT_APP_TEMPLATE_ADMIN }}
-      REACT_APP_TEMPLATE_USER: ${{ vars.REACT_APP_TEMPLATE_USER }}
-      REACT_APP_ADMIN_EMAIL: ${{ vars.REACT_APP_ADMIN_EMAIL }}
+      REACT_APP_EMAILJS_PUBLIC_KEY: ${{ secrets.REACT_APP_EMAILJS_PUBLIC_KEY }}
+      REACT_APP_SERVICE_ID: ${{ secrets.REACT_APP_SERVICE_ID }}
+      REACT_APP_TEMPLATE_ADMIN: ${{ secrets.REACT_APP_TEMPLATE_ADMIN }}
+      REACT_APP_TEMPLATE_USER: ${{ secrets.REACT_APP_TEMPLATE_USER }}
+      REACT_APP_ADMIN_EMAIL: ${{ secrets.REACT_APP_ADMIN_EMAIL }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
