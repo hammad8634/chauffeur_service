@@ -76,7 +76,7 @@ body {
 }
 
 .global-swiper .swiper-wrapper {
-  align-items: stretch; /* stretch slides to the tallest in view */
+  align-items: stretch;
 }
 .global-swiper .swiper-slide {
   height: auto; /* let the card define the height */
