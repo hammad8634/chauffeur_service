@@ -32,6 +32,14 @@ body {
     border-color 0.25s;
 }
 
+.vehicle-global-swiper .swiper-button-prev,
+.vehicle-global-swiper .swiper-button-next {
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(247 201 66);
+  background: #f7c94236;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.97);
+}
+
 .global-swiper .swiper-button-prev::after,
 .global-swiper .swiper-button-next::after {
   font-size: var(--swiper-navigation-size) !important;

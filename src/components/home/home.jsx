@@ -13,7 +13,7 @@ import RideWithUsImg from "../../images/cullinan.jpg";
 // import BGVideo2 from "../../images/bg-video.mp4";
 import HeroVideo from "../media/HeroVideo";
 import InstaFeedLite from "../social/InstaFeedLite";
-import instaThumbNail1 from "../../images/rolls-royce-ghost/rolls-royce-ghost-1.jpg";
+import instaThumbNail1 from "../../images/Instagram-feed-thumbnail/Instagram-feed-thumbnail-1.jpg";
 
 const Home = () => {
   const feedItems = [
@@ -21,7 +21,7 @@ const Home = () => {
       url: "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
       thumb: instaThumbNail1,
       // title: "Ride in comfort with the best chauffeur service in the UAE.",
-      ratio: "1x1",
+      // ratio: "1x1",
     },
     // {
     //   url: "https://www.instagram.com/rollsroycetransfers/reel/<another-id>/",

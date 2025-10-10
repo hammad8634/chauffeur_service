@@ -48,7 +48,12 @@ const CountryPhoneInput = ({
           placeholder="Phone Number"
           name="phone"
           value={phone}
-          onChange={(e) => onPhoneChange(e.target.value)}
+          onChange={(e) => {
+            const v = e.target.value
+              .replace(/[^\d+]/g, "")
+              .replace(/(?!^)\+/g, "");
+            onPhoneChange(v);
+          }}
         />
       </InputGroup>
     </div>
@@ -86,6 +91,23 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
     comments: "",
   });
 
+  const resetForm = () => {
+    setFormData({
+      emirate: "",
+      pickupTime: "",
+      phone: "",
+      countryCode: "+971",
+      locationDetails: "",
+    });
+    setModalData({
+      email: "",
+      fullName: "",
+      comments: "",
+    });
+    setSending(false);
+    setActualShow(false);
+  };
+
   const [show, setShow] = useState(false);
 
   const actualShow = mode === "navbar" ? showExternal : show;
@@ -99,6 +121,31 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
 
   const [sending, setSending] = useState(false);
   const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
+  // Keep one leading +, strip junk, avoid double country code
+  const normalizePhone = (cc, phone) => {
+    if (!phone) return "";
+    const ccNorm = (cc || "").trim(); // e.g. "+971"
+    const ccDigits = ccNorm.replace(/\D/g, ""); // "971"
+
+    // keep digits and the first leading +
+    const cleaned = phone
+      .trim()
+      .replace(/[^\d+]/g, "") // remove spaces, dashes, etc.
+      .replace(/(?!^)\+/g, ""); // drop any + that's not first
+
+    // If user already entered an international format, use it as-is
+    if (cleaned.startsWith("+")) return cleaned;
+
+    // Remove leading zeros from local part (050... -> 50...)
+    const local = cleaned.replace(/^0+/, "");
+
+    // If user typed the country code digits already (e.g., "9715...")
+    if (local.startsWith(ccDigits)) return `+${local}`;
+
+    // Default: add the selected country code
+    return `${ccNorm} ${local}`;
+  };
 
   const handleSubmit = async () => {
     if (
@@ -122,7 +169,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
     const params = {
       full_name: modalData.fullName,
       user_email: modalData.email,
-      phone: `${formData.countryCode} ${formData.phone}`,
+      phone: normalizePhone(formData.countryCode, formData.phone),
       country_code: formData.countryCode,
       emirate: formData.emirate,
       pickup_time: formData.pickupTime,
@@ -143,7 +190,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
       ]);
 
       alert("Thanks! Your booking request has been sent.");
-      setActualShow(false);
+      resetForm();
     } catch (e) {
       console.error(e);
       alert("Could not send your request. Please try again.");
