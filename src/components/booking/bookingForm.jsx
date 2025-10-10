@@ -65,6 +65,12 @@ const emirates = [
   "Fujairah",
 ];
 
+const SERVICE_ID = process.env.REACT_APP_SERVICE_ID;
+const TEMPLATE_ADMIN = process.env.REACT_APP_TEMPLATE_ADMIN;
+const TEMPLATE_USER = process.env.REACT_APP_TEMPLATE_USER;
+
+const ADMIN_EMAIL = process.env.REACT_APP_ADMIN_EMAIL;
+
 const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
   const [formData, setFormData] = useState({
     emirate: "",
@@ -91,49 +97,63 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
   const handleModalChange = (e) =>
     setModalData({ ...modalData, [e.target.name]: e.target.value });
 
+  const [sending, setSending] = useState(false);
+  const isValidEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+
   const handleSubmit = async () => {
-    if (!formData.emirate || !formData.pickupTime || !formData.phone) {
+    if (
+      !formData.emirate ||
+      !formData.pickupTime ||
+      !formData.phone ||
+      !modalData.email ||
+      !modalData.fullName
+    ) {
       alert(
-        "Please select Emirate, Pickup Time and enter Phone before submitting."
+        "Please complete Emirate, Pickup Time, Phone, Full Name and Email."
       );
       return;
     }
 
+    if (!isValidEmail(modalData.email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
     const params = {
-      to_email: "info@rollsroycetransfers.com",
-
-      location: formData.emirate,
-      pickup_time: formData.pickupTime,
-
-      phone: `${formData.countryCode} ${formData.phone}`,
-
-      user_email: modalData.email,
       full_name: modalData.fullName,
-      comments: modalData.comments,
-
+      user_email: modalData.email,
+      phone: `${formData.countryCode} ${formData.phone}`,
       country_code: formData.countryCode,
       emirate: formData.emirate,
+      pickup_time: formData.pickupTime,
       location_details: formData.locationDetails,
+      comments: (modalData.comments || "").trim() || "—",
+
+      location: formData.emirate,
+
+      to_email: ADMIN_EMAIL,
     };
 
     try {
-      await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_TEMPLATE_ID",
-        params,
-        "YOUR_PUBLIC_KEY"
-      );
+      setSending(true);
+
+      await Promise.all([
+        emailjs.send(SERVICE_ID, TEMPLATE_ADMIN, params),
+        emailjs.send(SERVICE_ID, TEMPLATE_USER, params),
+      ]);
+
       alert("Thanks! Your booking request has been sent.");
       setActualShow(false);
     } catch (e) {
       console.error(e);
       alert("Could not send your request. Please try again.");
+    } finally {
+      setSending(false);
     }
   };
 
   return (
     <>
-      {/* Home Page Flow */}
       {mode === "home" && (
         <div className="booking-form mx-auto mb-5">
           <Row className="g-3">
@@ -157,7 +177,6 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
               </div>
             </Col>
 
-            {/* Date/Time */}
             <Col md={4} xs={12}>
               <div className="luxury-input">
                 <FaCalendarAlt className="luxury-icon" />
@@ -306,8 +325,16 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                     name="email"
                     value={modalData.email}
                     onChange={handleModalChange}
+                    required
+                    isInvalid={
+                      modalData.email !== "" &&
+                      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(modalData.email)
+                    }
                   />
                 </div>
+                <Form.Control.Feedback type="invalid">
+                  Please enter a valid email address.
+                </Form.Control.Feedback>
               </Col>
               <Col lg={6} xs={12}>
                 <div className="luxury-input">
@@ -316,6 +343,7 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
                     type="text"
                     placeholder="Full Name"
                     name="fullName"
+                    required
                     value={modalData.fullName}
                     onChange={handleModalChange}
                   />
@@ -354,8 +382,12 @@ const BookingForm = ({ mode = "home", showExternal, setShowExternal }) => {
           <Button variant="secondary" onClick={() => setActualShow(false)}>
             Cancel
           </Button>
-          <Button className="luxury-btn" onClick={handleSubmit}>
-            Submit
+          <Button
+            className="luxury-btn"
+            onClick={handleSubmit}
+            disabled={sending}
+          >
+            {sending ? "Sending..." : "Submit"}
           </Button>
         </Modal.Footer>
       </Modal>
