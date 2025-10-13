@@ -163,9 +163,8 @@ const Contact = () => {
         <Container>
           <Row>
             {/* Contact Form */}
+            <h2 className="section-heading text-center">Send Us a Message</h2>
             <Col md={7} className="mb-4">
-              <h2 className="section-heading">Send Us a Message</h2>
-
               {submitted && (
                 <Alert variant="success" className="mb-3">
                   Thank you! Your message has been received. Our team will get
@@ -257,7 +256,7 @@ const Contact = () => {
                   <i className="bi bi-geo-alt-fill"></i>
                   <div>
                     <h5>Our Location</h5>
-                    <p>Dubi, United Arab Emirates</p>
+                    <p>United Arab Emirates</p>
                   </div>
                 </div>
                 <div className="info-box">
@@ -271,7 +270,14 @@ const Contact = () => {
                   <i className="bi bi-envelope-fill"></i>
                   <div>
                     <h5>Email</h5>
-                    <p>info@rollsroycetransfers.com</p>
+                    <p>
+                      <a
+                        className="email-link"
+                        href="mailto:info@rollsroycetransfers.com"
+                      >
+                        info@rollsroycetransfers.com
+                      </a>
+                    </p>{" "}
                   </div>
                 </div>
               </div>

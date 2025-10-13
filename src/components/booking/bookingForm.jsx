@@ -34,7 +34,10 @@ const CountryPhoneInput = ({
             {countryCode || "+___"}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu className="code-menu">
+          <Dropdown.Menu
+            className="code-menu"
+            style={{ maxHeight: "260px", overflowY: "auto" }}
+          >
             {countries.map((c) => (
               <Dropdown.Item eventKey={c.dial_code} key={c.code}>
                 {c.name} ({c.dial_code})

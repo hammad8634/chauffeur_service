@@ -85,3 +85,11 @@ body {
 .global-swiper .swiper-slide > * {
   width: 100%;
 }
+.email-link {
+  /* text-decoration: none; */
+  color: inherit;
+}
+
+.email-link:hover {
+  color: #f7c942;
+}

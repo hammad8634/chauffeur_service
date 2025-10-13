@@ -48,7 +48,12 @@ const Footer = () => {
           {/* Contact Info */}
           <Col md={3}>
             <h5 className="footer-brand">Contact</h5>
-            <p>Email: info@rollsroycetransfers.com</p>
+            <p>
+              Email:{" "}
+              <a className="email-link" href="mailto:info@rollsroycetransfers.com">
+                info@rollsroycetransfers.com
+              </a>
+            </p>{" "}
             <p>Phone: +971 56 776 6002</p>
             <div className="footer-socials">
               <a
