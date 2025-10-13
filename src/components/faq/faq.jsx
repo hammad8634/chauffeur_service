@@ -7,7 +7,7 @@ const FAQ = () => {
     {
       question: "What cars are available for chauffeur service in UAE?",
       answer:
-        "We specialize in Rolls Royce chauffeur service for weddings, corporate events, airport transfers, and luxury experiences.",
+        "We offer a distinguished fleet of Rolls-Royce vehicles, including the Phantom, Ghost, Ghost Series III, Cullinan Black, and Cullinan Grey — each driven by a professional chauffeur to ensure an effortless and elegant journey.",
     },
     {
       question: "How do I book a chauffeur in UAE?",

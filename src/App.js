@@ -7,6 +7,7 @@ import FAQ from "./components/faq/faq";
 import About from "./components/about/about";
 import Contact from "./components/contact/contact";
 import VehicleDetail from "./components/vehicles/vehicleDetails";
+import Fleet from "./components/fleet/fleet";
 import "./App.css";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
+            <Route path="/fleet" element={<Fleet />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/vehicle/:id" element={<VehicleDetail />} />
             <Route path="/faq" element={<FAQ />} />

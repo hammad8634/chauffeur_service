@@ -41,9 +41,10 @@ const LuxuryNavbar = () => {
           <Navbar.Collapse id="navbar-nav">
             <Nav className="mx-auto luxury-nav-links">
               <Nav.Link as={Link} to="/" onClick={closeMenu}>Home</Nav.Link>
+              <Nav.Link as={Link} to="/fleet" onClick={closeMenu}>Fleet</Nav.Link>
               <Nav.Link as={Link} to="/about" onClick={closeMenu}>About Us</Nav.Link>
               <Nav.Link as={Link} to="/faq" onClick={closeMenu}>FAQ</Nav.Link>
-              <Nav.Link as={Link} to="/contact" onClick={closeMenu}>Contact</Nav.Link>
+              <Nav.Link as={Link} to="/contact" onClick={closeMenu}>Contact Us</Nav.Link>
             </Nav>
 
             <div className="auth-buttons">

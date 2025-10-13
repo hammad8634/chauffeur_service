@@ -13,7 +13,7 @@ import "./contact.css";
 import emailjs from "@emailjs/browser";
 import countries from "../../data/countries.json";
 
-// === Reuseable country + phone input (same pattern as Booking) ===
+// === Reusable country + phone input (same pattern as Booking) ===
 const CountryPhoneInput = ({
   countryCode,
   phone,
@@ -23,11 +23,15 @@ const CountryPhoneInput = ({
   return (
     <div className="luxury-input">
       <InputGroup>
-        <Dropdown onSelect={(code) => onCodeChange(code)}>
+        <Dropdown onSelect={(code) => onCodeChange(code)} flip>
           <Dropdown.Toggle as={InputGroup.Text} className="code-toggle">
             {countryCode || "+___"}
           </Dropdown.Toggle>
-          <Dropdown.Menu className="code-menu">
+          <Dropdown.Menu
+            className="code-menu"
+            // ✨ Scrollable country list
+            style={{ maxHeight: "260px", overflowY: "auto" }}
+          >
             {countries.map((c) => (
               <Dropdown.Item eventKey={c.dial_code} key={c.code}>
                 {c.name} ({c.dial_code})
