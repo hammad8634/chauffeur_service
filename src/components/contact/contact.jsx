@@ -153,8 +153,8 @@ const Contact = () => {
             Get In <span className="highlight">Touch</span>
           </h1>
           <p className="contact-subtitle">
-            Reach out to Dubai’s trusted chauffeur service for bookings,
-            support, or custom luxury experiences.
+            Reach out to UAE’s trusted chauffeur service for bookings, support,
+            or custom luxury experiences.
           </p>
         </Container>
       </section>
@@ -257,7 +257,7 @@ const Contact = () => {
                   <i className="bi bi-geo-alt-fill"></i>
                   <div>
                     <h5>Our Location</h5>
-                    <p>Dubai, United Arab Emirates</p>
+                    <p>Dubi, United Arab Emirates</p>
                   </div>
                 </div>
                 <div className="info-box">

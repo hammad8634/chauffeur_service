@@ -12,7 +12,7 @@ const About = () => {
             About <span className="highlight">Us</span>
           </h1>
           <p className="about-subtitle">
-            Redefining luxury chauffeur experiences in Dubai with elegance,
+            Redefining luxury chauffeur experiences in UAE with elegance,
             exclusivity, and unmatched service.
           </p>
         </Container>
@@ -36,7 +36,7 @@ const About = () => {
                 transportation. Our Rolls Royce chauffeur service is about
                 prestige, comfort, and trust. Over the years, we have become the
                 go-to choice for business leaders, celebrities, and discerning
-                clients in Dubai who expect nothing but the best.
+                clients in UAE who expect nothing but the best.
               </p>
               <p className="section-text">
                 With every journey, we uphold the promise of discretion,
@@ -65,7 +65,7 @@ const About = () => {
               <div className="vision-box">
                 <h3 className="vision-title">Our Vision</h3>
                 <p className="vision-text">
-                  To be Dubai’s most trusted name in luxury chauffeur services,
+                  To be UAE’s most trusted name in luxury chauffeur services,
                   redefining how clients experience comfort and sophistication
                   on the road.
                 </p>

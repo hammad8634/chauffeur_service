@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./home.css";
 import Testimonials from "./testimonials";
@@ -16,6 +16,8 @@ import InstaFeedLite from "../social/InstaFeedLite";
 import instaThumbNail1 from "../../images/Instagram-feed-thumbnail/Instagram-feed-thumbnail-1.jpg";
 
 const Home = () => {
+  const [showBooking, setShowBooking] = useState(false);
+
   const feedItems = [
     {
       url: "https://www.instagram.com/rollsroycetransfers/reel/DPlxY7wj4Mt/",
@@ -143,7 +145,7 @@ const Home = () => {
             <h2 className="benefits-title mb-3">Why Ride With Us?</h2>
             <p className="benefits-subtitle mb-4">
               Our Rolls Royce chauffeur service redefines elegance and
-              reliability in Dubai. Here's why clients trust us:
+              reliability in UAE. Here's why clients trust us:
             </p>
           </div>
 
@@ -218,11 +220,23 @@ const Home = () => {
               Take Comfort on the Road, Book Your Chauffeur Today!
             </h2>
             <p className="cta-subtitle">
-              Experience the Rolls Royce luxury in Dubai — tailored rides with
+              Experience the Rolls Royce luxury in UAE — tailored rides with
               professional chauffeurs, anytime you need.
             </p>
-            <button className="btn cta-btn">Book Now</button>
+            <button
+              className="btn cta-btn"
+              onClick={() => setShowBooking(true)}
+              aria-haspopup="dialog"
+              aria-expanded={showBooking ? "true" : "false"}
+            >
+              Book Now
+            </button>{" "}
           </div>
+          <BookingForm
+            mode="navbar"
+            showExternal={showBooking}
+            setShowExternal={setShowBooking}
+          />
         </div>
       </section>
 
